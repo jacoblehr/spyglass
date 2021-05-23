@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net"
+	"time"
 )
 
 type ScanResult struct {
@@ -34,6 +35,8 @@ func scanner(job ScanJob) {
 }
 
 func main() {
+	start := time.Now()
+
 	fmt.Println("Spyglass Port Scanner v0.1")
 
 	ports := make(chan int, 100)
@@ -69,4 +72,7 @@ func main() {
 			fmt.Printf("Open port: %s:%d\n", result.hostname, result.port)
 		}
 	}
+
+	elapsed := time.Since(start)
+	fmt.Println("\nScan completed in", elapsed)
 }
